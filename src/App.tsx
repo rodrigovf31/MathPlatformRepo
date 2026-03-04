@@ -8,6 +8,7 @@ import YearPage from "./pages/YearPage";
 import About from "./pages/About";
 import Privacy from "./pages/Privacy";
 import Admin from "./pages/Admin";
+import AfiliadosDoacoes from "./pages/AfiliadosDoacoes";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -23,6 +24,7 @@ const App = () => (
           <Route path="/ano/:year" element={<YearPage />} />
           <Route path="/sobre" element={<About />} />
           <Route path="/privacidade" element={<Privacy />} />
+          <Route path="/afiliados-e-doacoes" element={<AfiliadosDoacoes />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
