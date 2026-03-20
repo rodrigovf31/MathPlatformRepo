@@ -13,7 +13,10 @@ const YearPage = () => {
   const { year } = useParams();
   const yearNum = Number(year);
   const topics = getTopicsByYear(yearNum);
-  const { data: resources = [], isLoading,} = useResources(yearNum);
+  const { data: resources = [], isLoading, isError, error } = useResources(yearNum);
+  if (isError) {
+  console.error("Erro Supabase:", error);
+}
   
   const [expandedTopics, setExpandedTopics] = useState<Set<string>>(new Set(topics.map(t => t.id)));
   const [viewingPdf, setViewingPdf] = useState<{ url: string; title: string } | null>(null);
