@@ -4,7 +4,7 @@ import path from "path";
 import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
-export default defineConfig(({ mode }) => ({
+export default defineConfig(({ mode, isSsrBuild }) => ({
   server: {
     host: "::",
     port: 8080,
@@ -22,12 +22,16 @@ export default defineConfig(({ mode }) => ({
     __BUILD_YEAR__: JSON.stringify(new Date().getFullYear()),
   },
   build: {
-    rollupOptions: {
-      output: {
-        manualChunks: {
-          "react-vendor": ["react", "react-dom", "react-router-dom"],
+    // manualChunks é só para o bundle de cliente — no build --ssr, react/react-dom
+    // ficam externos por omissão e o Rollup rejeita chunká-los manualmente.
+    rollupOptions: isSsrBuild
+      ? undefined
+      : {
+          output: {
+            manualChunks: {
+              "react-vendor": ["react", "react-dom", "react-router-dom"],
+            },
+          },
         },
-      },
-    },
   },
 }));

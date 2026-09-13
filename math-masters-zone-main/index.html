@@ -1,25 +1,48 @@
 <!doctype html>
-<html lang="pt">
+<html lang="pt-PT">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MatA — Recursos de Matemática A | Ensino Secundário</title>
-    <meta name="description" content="Plataforma gratuita de recursos de estudo para Matemática A do ensino secundário português. Fichas de exercícios e guias de teoria para o 10º, 11º e 12º ano." />
     <meta name="author" content="MatA" />
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1414887226515936"
-     crossorigin="anonymous"></script>
-
+    <link rel="preconnect" href="https://pagead2.googlesyndication.com" />
+    <!-- SEO:START -->
+    <!-- Conteúdo por omissão para `npm run dev`. Em produção, scripts/prerender.mjs
+         substitui este bloco por página, entre estes marcadores, a partir de src/seo/registry.ts. -->
+    <title>MatA — Recursos de Matemática A | Ensino Secundário</title>
+    <meta name="description" content="Fichas de exercícios e guias de teoria de Matemática A para o 10.º, 11.º e 12.º ano do ensino secundário português. Gratuitos, sem registo." />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://matematicaa.pt/" />
     <meta property="og:title" content="MatA — Recursos de Matemática A" />
-    <meta property="og:description" content="Fichas de exercícios e guias de teoria para Matemática A do 10º, 11º e 12º ano." />
+    <meta property="og:description" content="Fichas de exercícios e guias de teoria de Matemática A para o 10.º, 11.º e 12.º ano do ensino secundário português. Gratuitos, sem registo." />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
-
+    <meta property="og:url" content="https://matematicaa.pt/" />
+    <meta property="og:image" content="https://matematicaa.pt/og/og-default.png" />
+    <meta property="og:locale" content="pt_PT" />
+    <meta property="og:site_name" content="MatA" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+    <meta name="twitter:image" content="https://matematicaa.pt/og/og-default.png" />
+    <!-- SEO:END -->
   </head>
 
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <script>
+      // AdSense carregado após o LCP (idle), não bloqueia o parse/render inicial.
+      (function () {
+        function loadAdSense() {
+          var s = document.createElement("script");
+          s.async = true;
+          s.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1414887226515936";
+          s.crossOrigin = "anonymous";
+          document.head.appendChild(s);
+        }
+        if ("requestIdleCallback" in window) {
+          requestIdleCallback(loadAdSense, { timeout: 4000 });
+        } else {
+          setTimeout(loadAdSense, 2000);
+        }
+      })();
+    </script>
   </body>
 </html>
