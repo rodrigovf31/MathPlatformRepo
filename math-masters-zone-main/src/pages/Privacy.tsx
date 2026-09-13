@@ -1,5 +1,6 @@
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import { PRIVACY_LAST_UPDATED, formatPtDate } from "@/content/legal";
 
 const Privacy = () => {
   return (
@@ -10,7 +11,7 @@ const Privacy = () => {
           <h1 className="text-3xl font-extrabold mb-6 text-primary">Política de Privacidade</h1>
 
           <div className="prose prose-gray max-w-none space-y-4 text-muted-foreground text-sm">
-            <p><strong className="text-foreground">Última atualização:</strong> {new Date().toLocaleDateString("pt-PT")}</p>
+            <p><strong className="text-foreground">Última atualização:</strong> {formatPtDate(PRIVACY_LAST_UPDATED)}</p>
 
             <h2 className="text-lg font-bold text-foreground pt-2">1. Informação Geral</h2>
             <p>A MatA respeita a privacidade dos seus utilizadores. Esta política explica como recolhemos, usamos e protegemos a informação quando visitas a nossa plataforma.</p>

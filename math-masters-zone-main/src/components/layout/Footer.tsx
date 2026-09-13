@@ -43,7 +43,7 @@ const Footer = () => {
         </div>
 
         <div className="mt-8 pt-6 border-t text-center text-xs text-muted-foreground">
-          © {new Date().getFullYear()} MatA. Todos os direitos reservados.
+          © {__BUILD_YEAR__} MatA. Todos os direitos reservados.
         </div>
       </div>
     </footer>

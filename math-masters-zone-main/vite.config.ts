@@ -18,4 +18,7 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  define: {
+    __BUILD_YEAR__: JSON.stringify(new Date().getFullYear()),
+  },
 }));
