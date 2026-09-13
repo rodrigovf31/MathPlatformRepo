@@ -23,12 +23,23 @@ const PdfCard = ({ title, type, fileUrl, onView }: PdfCardProps) => {
         </span>
       </div>
       <div className="flex items-center gap-2 shrink-0">
-        <Button variant="outline" size="sm" onClick={onView} className="gap-1">
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={onView}
+          aria-label="Consultar"
+          className="gap-1 h-11 w-11 sm:h-9 sm:w-auto sm:px-3"
+        >
           <Eye className="h-3.5 w-3.5" />
           <span className="hidden sm:inline">Consultar</span>
         </Button>
-        <Button variant="ghost" size="sm" asChild className="gap-1">
-          <a href={fileUrl} download target="_blank" rel="noopener noreferrer">
+        <Button
+          variant="ghost"
+          size="sm"
+          asChild
+          className="gap-1 h-11 w-11 sm:h-9 sm:w-auto sm:px-3"
+        >
+          <a href={fileUrl} download target="_blank" rel="noopener noreferrer" aria-label="Descarregar">
             <Download className="h-3.5 w-3.5" />
             <span className="hidden sm:inline">Descarregar</span>
           </a>
