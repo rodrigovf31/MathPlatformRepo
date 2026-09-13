@@ -1,0 +1,108 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+@layer base {
+  :root {
+    --background: 0 0% 95%;
+    --foreground: 0 0% 20%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 20%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 20%;
+
+    --primary: 218 87% 59%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 39 87% 64%;
+    --secondary-foreground: 0 0% 20%;
+
+    --muted: 0 0% 90%;
+    --muted-foreground: 0 0% 40%;
+
+    --accent: 28 87% 63%;
+    --accent-foreground: 0 0% 100%;
+
+    --accent-warm: 16 87% 62%;
+    --accent-warm-foreground: 0 0% 100%;
+
+    --accent-gold: 28 87% 63%;
+    --accent-light: 39 87% 94%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 0 0% 88%;
+    --input: 0 0% 88%;
+    --ring: 218 87% 59%;
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 0 0% 20%;
+    --sidebar-primary: 218 87% 59%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 39 87% 94%;
+    --sidebar-accent-foreground: 0 0% 20%;
+    --sidebar-border: 0 0% 88%;
+    --sidebar-ring: 218 87% 59%;
+
+    --shadow-card: 0 2px 12px -2px hsla(0, 0%, 0%, 0.06);
+    --shadow-card-hover: 0 8px 24px -4px hsla(218, 87%, 59%, 0.12);
+  }
+
+  .dark {
+    --background: 220 20% 10%;
+    --foreground: 0 0% 95%;
+    --card: 220 20% 14%;
+    --card-foreground: 0 0% 95%;
+    --popover: 220 20% 14%;
+    --popover-foreground: 0 0% 95%;
+    --primary: 218 87% 59%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 39 87% 64%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 220 15% 20%;
+    --muted-foreground: 0 0% 60%;
+    --accent: 28 87% 63%;
+    --accent-foreground: 0 0% 100%;
+    --accent-warm: 16 87% 62%;
+    --accent-warm-foreground: 0 0% 100%;
+    --accent-gold: 28 87% 63%;
+    --accent-light: 39 40% 20%;
+    --destructive: 0 62% 30%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 220 15% 22%;
+    --input: 220 15% 22%;
+    --ring: 218 87% 59%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply text-foreground font-semibold tracking-tight;
+  }
+}
+
+@layer utilities {
+  .section-spacing {
+    @apply py-12 md:py-16 lg:py-20;
+  }
+
+  .container-narrow {
+    @apply max-w-6xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+}
