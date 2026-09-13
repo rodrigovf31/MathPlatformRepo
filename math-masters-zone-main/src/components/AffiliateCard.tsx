@@ -24,7 +24,7 @@ const AffiliateCard = ({ name, description, imageUrl, affiliateUrl }: AffiliateC
     >
       <div className="aspect-[4/3] bg-accent-light flex items-center justify-center">
         {imageUrl ? (
-          <img src={imageUrl} alt={name} className="w-full h-full object-cover" loading="lazy" />
+          <img src={imageUrl} alt={name} className="w-full h-full object-cover" loading="lazy" decoding="async" />
         ) : (
           <div className="text-muted-foreground text-sm">Imagem do produto</div>
         )}
