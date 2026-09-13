@@ -21,4 +21,13 @@ export default defineConfig(({ mode }) => ({
   define: {
     __BUILD_YEAR__: JSON.stringify(new Date().getFullYear()),
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          "react-vendor": ["react", "react-dom", "react-router-dom"],
+        },
+      },
+    },
+  },
 }));

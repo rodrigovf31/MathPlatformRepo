@@ -4,6 +4,11 @@ import { Button } from "@/components/ui/button";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import AdBanner from "@/components/AdBanner";
+import Seo from "@/components/Seo";
+import Breadcrumbs from "@/components/Breadcrumbs";
+import { findPageSeo } from "@/seo/registry";
+
+const seo = findPageSeo("/afiliados-e-doacoes")!;
 
 /* TODO: Substituir pelos links e dados reais de cada produto afiliado Amazon */
 const affiliateProducts = [
@@ -22,11 +27,15 @@ const affiliateProducts = [
 const AfiliadosDoacoes = () => {
   return (
     <div className="min-h-screen flex flex-col">
+      <Seo {...seo} />
       <Header />
 
       <main className="flex-1">
         {/* Hero Section */}
         <section className="section-spacing bg-card border-b">
+          <div className="container-narrow max-w-3xl mx-auto">
+            <Breadcrumbs items={[{ name: "Início", path: "/" }, { name: "Apoia o Projeto", path: "/afiliados-e-doacoes" }]} />
+          </div>
           <div className="container-narrow max-w-3xl mx-auto text-center">
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight mb-6 text-primary">
               Apoia o Projeto

@@ -8,6 +8,10 @@ import { topics } from "@/data/topics";
 import { Trash2, Upload, LogIn, LogOut } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import Header from "@/components/layout/Header";
+import Seo from "@/components/Seo";
+import { findPageSeo } from "@/seo/registry";
+
+const seo = findPageSeo("/admin")!;
 
 const Admin = () => {
   const [session, setSession] = useState<any>(null);
@@ -117,6 +121,7 @@ const Admin = () => {
   if (!session) {
     return (
       <div className="min-h-screen flex flex-col">
+        <Seo {...seo} />
         <Header />
         <main className="flex-1 flex items-center justify-center p-4">
           <form onSubmit={handleLogin} className="w-full max-w-sm space-y-4 bg-card p-8 rounded-xl border shadow-card">
@@ -140,6 +145,7 @@ const Admin = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
+      <Seo {...seo} />
       <Header />
       <main className="flex-1 section-spacing">
         <div className="container-narrow">

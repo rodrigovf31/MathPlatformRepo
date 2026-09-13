@@ -21,9 +21,9 @@ const Footer = () => {
           <div>
             <h4 className="font-semibold text-sm mb-3">Recursos</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><Link to="/ano/10" className="hover:text-primary transition-colors">10º Ano</Link></li>
-              <li><Link to="/ano/11" className="hover:text-primary transition-colors">11º Ano</Link></li>
-              <li><Link to="/ano/12" className="hover:text-primary transition-colors">12º Ano</Link></li>
+              <li><Link to="/matematica-a/10-ano" className="hover:text-primary transition-colors">Fichas e teoria do 10º ano</Link></li>
+              <li><Link to="/matematica-a/11-ano" className="hover:text-primary transition-colors">Fichas e teoria do 11º ano</Link></li>
+              <li><Link to="/matematica-a/12-ano" className="hover:text-primary transition-colors">Fichas e teoria do 12º ano</Link></li>
             </ul>
           </div>
 

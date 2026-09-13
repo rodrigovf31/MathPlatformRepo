@@ -10,7 +10,7 @@ interface YearCardProps {
 const YearCard = ({ year, description, topicCount }: YearCardProps) => {
   return (
     <Link
-      to={`/ano/${year}`}
+      to={`/matematica-a/${year}-ano`}
       className="group block rounded-xl bg-card border border-border p-6 shadow-card hover:shadow-card-hover hover:border-primary/30 transition-all duration-300"
     >
       <div className="flex items-start justify-between mb-4">

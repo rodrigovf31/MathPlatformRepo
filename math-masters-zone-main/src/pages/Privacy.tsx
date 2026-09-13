@@ -1,13 +1,21 @@
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import Seo from "@/components/Seo";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import { PRIVACY_LAST_UPDATED, formatPtDate } from "@/content/legal";
+import { findPageSeo } from "@/seo/registry";
+import { SITE } from "@/seo/site";
+
+const seo = findPageSeo("/privacidade")!;
 
 const Privacy = () => {
   return (
     <div className="min-h-screen flex flex-col">
+      <Seo {...seo} />
       <Header />
       <main className="flex-1 section-spacing">
         <article className="container-narrow max-w-3xl">
+          <Breadcrumbs items={[{ name: "Início", path: "/" }, { name: "Privacidade", path: "/privacidade" }]} />
           <h1 className="text-3xl font-extrabold mb-6 text-primary">Política de Privacidade</h1>
 
           <div className="prose prose-gray max-w-none space-y-4 text-muted-foreground text-sm">
@@ -29,8 +37,7 @@ const Privacy = () => {
             <p>Algumas páginas contêm links de afiliados para produtos recomendados. Ao clicar nestes links e efetuar uma compra, podemos receber uma comissão sem custo adicional para o utilizador.</p>
 
             <h2 className="text-lg font-bold text-foreground pt-2">6. Contacto</h2>
-            {/* TODO: Substituir pelo email real */}
-            <p>Para questões sobre esta política de privacidade, contacta-nos em: <strong className="text-foreground">contacto@mata.pt</strong></p>
+            <p>Para questões sobre esta política de privacidade, contacta-nos em: <strong className="text-foreground">{SITE.contactEmail}</strong></p>
           </div>
         </article>
       </main>
