@@ -12,6 +12,11 @@ dist
 dist-ssr
 *.local
 
+# Gerado em build time por scripts/fetch-content.mjs — nunca commitar,
+# fica sempre desatualizado em relação ao Supabase.
+src/content/resources.snapshot.json
+src/content/resources.lastmod.json
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

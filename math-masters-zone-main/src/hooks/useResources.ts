@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { supabase, Resource } from "@/lib/supabase";
+import snapshot from "@/content/resources.snapshot.json";
 
 export const useResources = (year?: number) => {
   return useQuery({
@@ -11,5 +12,7 @@ export const useResources = (year?: number) => {
       if (error) throw error;
       return (data as Resource[]) || [];
     },
+    initialData: (snapshot as Resource[]).filter((r) => !year || r.year === year),
+    staleTime: 5 * 60_000,
   });
 };
