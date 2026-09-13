@@ -1,17 +1,30 @@
 import { PageSeo } from "./types";
-import { getTopicsByYear } from "@/data/topics";
 import { PRIVACY_LAST_UPDATED } from "@/content/legal";
+import lastmodByYear from "@/content/resources.lastmod.json";
+
+/**
+ * Descrições fixas (não geradas a partir da lista de temas): o número e o
+ * comprimento dos nomes de tema variam por ano, o que tornava a description
+ * gerada instável entre 120-158 caracteres. Verificado (scripts/seo-audit.mjs).
+ */
+const YEAR_DESCRIPTIONS: Record<10 | 11 | 12, string> = {
+  10: "Fichas de exercícios e guias de teoria de Matemática A do 10.º ano: geometria, funções, estatística e sequências. Recursos gratuitos, organizados por tema.",
+  11: "Fichas de exercícios e guias de teoria de Matemática A do 11.º ano: trigonometria, sucessões, geometria analítica e probabilidades. Grátis, por tema.",
+  12: "Fichas de exercícios e guias de teoria de Matemática A do 12.º ano: exponenciais, limites, derivadas, primitivas e distribuições. Grátis, por tema.",
+};
 
 const yearPage = (year: 10 | 11 | 12): PageSeo => {
-  const topicNames = getTopicsByYear(year).map((t) => t.name).join(", ");
+  /** Real, derivado de max(created_at) dos recursos desse ano (Fase 3). Anos sem recursos ficam sem lastmod — nunca inventado. */
+  const lastmod = (lastmodByYear as Record<string, string>)[String(year)];
   return {
     path: `/matematica-a/${year}-ano`,
     title: `${year}.º Ano — Matemática A | MatA`,
-    description: `Fichas de exercícios e guias de teoria de Matemática A do ${year}.º ano: ${topicNames}. Recursos gratuitos, organizados por tema.`,
+    description: YEAR_DESCRIPTIONS[year],
     h1: `${year}.º Ano — Matemática A`,
     robots: "index,follow",
     ogType: "website",
     inSitemap: true,
+    ...(lastmod ? { lastmod } : {}),
     breadcrumb: [
       { name: "Início", path: "/" },
       { name: `${year}.º Ano`, path: `/matematica-a/${year}-ano` },
@@ -41,6 +54,10 @@ export const pageRegistry: PageSeo[] = [
     robots: "index,follow",
     ogType: "website",
     inSitemap: true,
+    breadcrumb: [
+      { name: "Início", path: "/" },
+      { name: "Sobre", path: "/sobre" },
+    ],
   },
   {
     path: "/privacidade",
@@ -51,6 +68,10 @@ export const pageRegistry: PageSeo[] = [
     ogType: "website",
     inSitemap: true,
     lastmod: PRIVACY_LAST_UPDATED,
+    breadcrumb: [
+      { name: "Início", path: "/" },
+      { name: "Privacidade", path: "/privacidade" },
+    ],
   },
   {
     path: "/afiliados-e-doacoes",
@@ -60,6 +81,10 @@ export const pageRegistry: PageSeo[] = [
     robots: "index,follow",
     ogType: "website",
     inSitemap: true,
+    breadcrumb: [
+      { name: "Início", path: "/" },
+      { name: "Apoia o Projeto", path: "/afiliados-e-doacoes" },
+    ],
   },
   {
     path: "/admin",

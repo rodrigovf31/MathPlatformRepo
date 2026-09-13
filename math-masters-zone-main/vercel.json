@@ -1,5 +1,12 @@
 {
+  "trailingSlash": false,
+  "cleanUrls": true,
+  "redirects": [
+    { "source": "/ano/10", "destination": "/matematica-a/10-ano", "permanent": true },
+    { "source": "/ano/11", "destination": "/matematica-a/11-ano", "permanent": true },
+    { "source": "/ano/12", "destination": "/matematica-a/12-ano", "permanent": true }
+  ],
   "rewrites": [
-    { "source": "/(.*)", "destination": "/index.html" }
+    { "source": "/recursos/:path*", "destination": "https://quwwhngraigrqjwlgywl.supabase.co/storage/v1/object/public/pdfs/:path*" }
   ]
 }

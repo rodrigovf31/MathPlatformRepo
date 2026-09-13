@@ -15,7 +15,7 @@ const Privacy = () => {
       <Header />
       <main className="flex-1 section-spacing">
         <article className="container-narrow max-w-3xl">
-          <Breadcrumbs items={[{ name: "Início", path: "/" }, { name: "Privacidade", path: "/privacidade" }]} />
+          <Breadcrumbs items={seo.breadcrumb ?? []} />
           <h1 className="text-3xl font-extrabold mb-6 text-primary">Política de Privacidade</h1>
 
           <div className="prose prose-gray max-w-none space-y-4 text-muted-foreground text-sm">

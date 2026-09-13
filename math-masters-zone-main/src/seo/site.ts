@@ -12,7 +12,7 @@ export const SITE = {
   contactEmail: "contacto@matematicaa.pt",
 } as const;
 
-/** Constrói uma URL absoluta canónica. Política: SEM barra final (exceto raiz). */
+/** Constrói uma URL absoluta canónica. Política: nunca barra final — a raiz fica "https://dominio" sem "/" à direita, consistente com trailingSlash:false no vercel.json. */
 export const absoluteUrl = (path: string): string => {
   const clean = path === "/" ? "" : `/${path.replace(/^\/|\/$/g, "")}`;
   return `${SITE.baseUrl}${clean}`;

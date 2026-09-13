@@ -13,7 +13,7 @@ const About = () => {
       <Header />
       <main className="flex-1 section-spacing">
         <article className="container-narrow max-w-3xl">
-          <Breadcrumbs items={[{ name: "Início", path: "/" }, { name: "Sobre", path: "/sobre" }]} />
+          <Breadcrumbs items={seo.breadcrumb ?? []} />
           <h1 className="text-3xl font-extrabold mb-6 text-primary">Sobre a MatA</h1>
 
           <div className="prose prose-gray max-w-none space-y-4 text-muted-foreground">

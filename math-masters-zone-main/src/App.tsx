@@ -38,7 +38,13 @@ const App = () => (
         <Route
           path="/admin"
           element={
-            <Suspense fallback={<div className="min-h-screen" />}>
+            <Suspense
+              fallback={
+                <div className="min-h-screen flex items-center justify-center">
+                  <h1 className="sr-only">Administração</h1>
+                </div>
+              }
+            >
               <Admin />
             </Suspense>
           }

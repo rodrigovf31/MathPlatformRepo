@@ -34,7 +34,7 @@ const AfiliadosDoacoes = () => {
         {/* Hero Section */}
         <section className="section-spacing bg-card border-b">
           <div className="container-narrow max-w-3xl mx-auto">
-            <Breadcrumbs items={[{ name: "Início", path: "/" }, { name: "Apoia o Projeto", path: "/afiliados-e-doacoes" }]} />
+            <Breadcrumbs items={seo.breadcrumb ?? []} />
           </div>
           <div className="container-narrow max-w-3xl mx-auto text-center">
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight mb-6 text-primary">

@@ -12,6 +12,7 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import { getTopicsByYear } from "@/data/topics";
 import { useResources } from "@/hooks/useResources";
 import { findPageSeo } from "@/seo/registry";
+import { toDomainPdfUrl } from "@/lib/pdf";
 
 interface YearPageProps {
   year: 10 | 11 | 12;
@@ -90,8 +91,8 @@ const YearPage = ({ year: yearNum }: YearPageProps) => {
                                 key={r.id}
                                 title={r.title}
                                 type={r.type as "ficha" | "guia"}
-                                fileUrl={r.file_url}
-                                onView={() => setViewingPdf({ url: r.file_url, title: r.title })}
+                                fileUrl={toDomainPdfUrl(r.file_url)}
+                                onView={() => setViewingPdf({ url: toDomainPdfUrl(r.file_url), title: r.title })}
                               />
                             ))
                           )}

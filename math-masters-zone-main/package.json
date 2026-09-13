@@ -7,7 +7,7 @@
     "fetch:content": "node --env-file-if-exists=.env scripts/fetch-content.mjs",
     "predev": "npm run fetch:content",
     "dev": "vite",
-    "build": "npm run fetch:content && vite build && vite build --ssr src/entry-server.tsx --outDir dist-ssr && node scripts/prerender.mjs",
+    "build": "npm run fetch:content && vite build && vite build --ssr src/entry-server.tsx --outDir dist-ssr && node scripts/prerender.mjs && node scripts/generate-sitemap.mjs && node scripts/seo-audit.mjs",
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
     "preview": "vite preview",
