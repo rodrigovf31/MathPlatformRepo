@@ -3,7 +3,7 @@ import { BookOpen } from "lucide-react";
 
 const Footer = () => {
   return (
-    <footer className="border-t bg-card mt-auto">
+    <footer className="glass-divider-t bg-card mt-auto">
       <div className="container-narrow py-10">
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
           {/* Brand */}
@@ -42,7 +42,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="mt-8 pt-6 border-t text-center text-xs text-muted-foreground">
+        <div className="mt-8 pt-6 glass-divider-t text-center text-xs text-muted-foreground">
           © {__BUILD_YEAR__} MatA. Todos os direitos reservados.
         </div>
       </div>

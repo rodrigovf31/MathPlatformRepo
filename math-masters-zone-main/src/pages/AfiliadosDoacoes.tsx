@@ -32,7 +32,7 @@ const AfiliadosDoacoes = () => {
 
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="section-spacing bg-card border-b">
+        <section className="section-spacing bg-card glass-divider-b">
           <div className="container-narrow max-w-3xl mx-auto">
             <Breadcrumbs items={seo.breadcrumb ?? []} />
           </div>
@@ -93,7 +93,7 @@ const AfiliadosDoacoes = () => {
               </Button>
 
               {/* Disclaimer legal de doações — NÃO remover nem esconder */}
-              <div className="text-xs text-muted-foreground leading-relaxed space-y-1 text-left border-t pt-4 mt-2">
+              <div className="text-xs text-muted-foreground leading-relaxed space-y-1 text-left glass-divider-t pt-4 mt-2">
                 <p>• Os donativos são voluntários e não concedem acesso a conteúdo adicional nem qualquer tipo de vantagem.</p>
                 <p>• Os donativos não são reembolsáveis, salvo em situações excecionais.</p>
                 <p>• Este site não é uma instituição de caridade registada — os donativos não são dedutíveis fiscalmente.</p>
@@ -175,7 +175,7 @@ const AfiliadosDoacoes = () => {
         </section>
 
         {/* Disclaimer geral da página — antes do footer */}
-        <section className="border-t bg-muted/30 py-8">
+        <section className="glass-divider-t bg-muted/30 py-8">
           <div className="container-narrow max-w-3xl mx-auto text-xs text-muted-foreground leading-relaxed space-y-3 text-center">
             <p>
               Este site apresenta conteúdo publicitário (através do Google AdSense) e links de afiliados
