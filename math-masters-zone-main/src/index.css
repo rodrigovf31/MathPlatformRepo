@@ -51,6 +51,20 @@
 
     --shadow-card: 0 2px 12px -2px hsla(0, 0%, 0%, 0.06);
     --shadow-card-hover: 0 8px 24px -4px hsla(218, 87%, 59%, 0.12);
+
+    /* Liquid Glass — tokens (HSL triplo, alpha aplicado no ponto de uso) */
+    --glass-fill: 0 0% 100%;
+    --glass-fill-alpha: 0.58;
+    --glass-border: 0 0% 100%;
+    --glass-border-alpha: 0.70;
+    --glass-highlight: 0 0% 100%;
+    --glass-tint: var(--primary);
+    --glass-blur: 16px;
+    --glass-saturate: 170%;
+    --glass-shadow: 0 2px 6px -2px hsl(0 0% 0% / 0.08), 0 10px 28px -12px hsl(var(--glass-tint) / 0.22);
+    --glass-shadow-hover: 0 4px 10px -4px hsl(0 0% 0% / 0.10), 0 18px 40px -14px hsl(var(--glass-tint) / 0.35);
+    --glass-ease: cubic-bezier(0.22, 1, 0.36, 1);
+    --glass-duration: 320ms;
   }
 
   .dark {
@@ -77,6 +91,15 @@
     --border: 220 15% 22%;
     --input: 220 15% 22%;
     --ring: 218 87% 59%;
+
+    /* Liquid Glass — variação para tema escuro */
+    --glass-fill: 220 20% 18%;
+    --glass-fill-alpha: 0.48;
+    --glass-border: 0 0% 100%;
+    --glass-border-alpha: 0.16;
+    --glass-highlight: 0 0% 100%;
+    --glass-shadow: 0 2px 6px -2px hsl(0 0% 0% / 0.50), 0 10px 28px -12px hsl(var(--glass-tint) / 0.30);
+    --glass-shadow-hover: 0 4px 10px -4px hsl(0 0% 0% / 0.55), 0 18px 40px -14px hsl(var(--glass-tint) / 0.45);
   }
 }
 
@@ -88,6 +111,12 @@
   body {
     @apply bg-background text-foreground font-sans antialiased;
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    /* Fundo ambiente suave: dá ao vidro cor para refratar. Sem attachment fixed (jank em mobile). */
+    background-image:
+      radial-gradient(48rem 24rem at 12% -6%, hsl(var(--primary) / 0.14), transparent 60%),
+      radial-gradient(40rem 22rem at 88% 8%, hsl(var(--secondary) / 0.16), transparent 60%),
+      radial-gradient(36rem 20rem at 50% 100%, hsl(var(--accent-warm) / 0.08), transparent 60%);
+    background-repeat: no-repeat;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -102,5 +131,484 @@
 
   .container-narrow {
     @apply max-w-6xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+}
+
+@layer components {
+  /* ============================================================
+     LIQUID GLASS — sistema visual de superfícies translúcidas.
+     Intensidade afinável só pelos tokens --glass-* em :root.
+     ============================================================ */
+
+  /* Superfície base: fill translúcido, borda de vidro, orla especular
+     no topo (inset), sombra tingida. ::before = refração; ::after = brilho. */
+  .glass {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    background-color: hsl(var(--glass-fill) / var(--glass-fill-alpha));
+    border: 1px solid hsl(var(--glass-border) / var(--glass-border-alpha));
+    box-shadow:
+      inset 0 1px 0 0 hsl(var(--glass-highlight) / 0.8),
+      inset 0 -1px 0 0 hsl(var(--glass-highlight) / 0.14),
+      inset 0 0 0 1px hsl(var(--glass-tint) / 0.06),
+      var(--glass-shadow);
+    transition-property: background-color, border-color, box-shadow, transform, color, backdrop-filter;
+    transition-duration: var(--glass-duration);
+    transition-timing-function: var(--glass-ease);
+  }
+
+  @supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .glass {
+      -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+      backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+    }
+  }
+
+  /* Refração sugerida: gradiente especular diagonal por baixo do conteúdo. */
+  .glass::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    border-radius: inherit;
+    background: linear-gradient(
+      135deg,
+      hsl(var(--glass-highlight) / 0.55) 0%,
+      hsl(var(--glass-highlight) / 0.10) 36%,
+      transparent 58%,
+      hsl(var(--glass-tint) / 0.12) 100%
+    );
+  }
+
+  /* Faixa de brilho líquido, em repouso fora do elemento e invisível. */
+  .glass::after {
+    content: "";
+    position: absolute;
+    inset: -40% -60%;
+    z-index: -1;
+    pointer-events: none;
+    background: linear-gradient(
+      105deg,
+      transparent 42%,
+      hsl(var(--glass-highlight) / 0.70) 50%,
+      transparent 58%
+    );
+    transform: translateX(-75%) skewX(-14deg);
+    opacity: 0;
+  }
+
+  /* Comportamento interativo: elevação + borda tinted + brilho a atravessar
+     em hover (só rato); pressão em :active (também em touch). */
+  @media (hover: hover) and (pointer: fine) {
+    .glass-interactive:hover {
+      transform: translateY(-2px);
+      border-color: hsl(var(--glass-tint) / 0.45);
+      box-shadow:
+        inset 0 1px 0 0 hsl(var(--glass-highlight) / 0.95),
+        inset 0 -1px 0 0 hsl(var(--glass-highlight) / 0.22),
+        inset 0 0 0 1px hsl(var(--glass-tint) / 0.10),
+        var(--glass-shadow-hover);
+    }
+    .glass-interactive:hover::after {
+      transform: translateX(75%) skewX(-14deg);
+      opacity: 1;
+      transition: transform 720ms var(--glass-ease), opacity 240ms var(--glass-ease);
+    }
+  }
+  .glass-interactive:active {
+    transform: translateY(0) scale(0.985);
+    transition-duration: 110ms;
+  }
+
+  /* Cards clicáveis: fill mais presente e elevação maior (vence
+     .glass-interactive por vir depois, com igual especificidade). */
+  .glass-card {
+    --glass-fill-alpha: 0.62;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .glass-card:hover {
+      transform: translateY(-4px);
+    }
+  }
+
+  /* Itens de listas repetidas: sem backdrop-filter (orçamento de GPU
+     — máx. ~12 elementos com blur por viewport). */
+  .glass-lite {
+    --glass-fill-alpha: 0.82;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+
+  /* Tints preenchidas. O fill é 6 pontos mais escuro que o token da cor:
+     compensa a mistura com o fundo claro para o contraste do texto não
+     descer abaixo do valor pré-vidro (medido; ver relatório). */
+  .glass-tint-primary {
+    --glass-fill: 218 87% 53%;
+    --glass-fill-alpha: 0.88;
+    --glass-border: var(--primary);
+    --glass-border-alpha: 0.55;
+  }
+  .glass-tint-secondary {
+    --glass-fill: var(--secondary);
+    --glass-fill-alpha: 0.88;
+    --glass-border: var(--secondary);
+    --glass-border-alpha: 0.55;
+    --glass-tint: var(--secondary);
+  }
+  .glass-tint-warm {
+    --glass-fill: 16 87% 56%;
+    --glass-fill-alpha: 0.88;
+    --glass-border: var(--accent-warm);
+    --glass-border-alpha: 0.55;
+    --glass-tint: var(--accent-warm);
+  }
+  .glass-tint-destructive {
+    --glass-fill: 0 84% 54%;
+    --glass-fill-alpha: 0.88;
+    --glass-border: var(--destructive);
+    --glass-border-alpha: 0.55;
+    --glass-tint: var(--destructive);
+  }
+
+  /* Variante outline: mais transparente. */
+  .glass-clear {
+    --glass-fill-alpha: 0.45;
+  }
+
+  /* Invisível em repouso; materializa em hover/focus-visible. */
+  .glass-ghost {
+    --glass-fill-alpha: 0;
+    --glass-border-alpha: 0;
+    box-shadow: none;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+  .glass-ghost::before {
+    opacity: 0;
+    transition: opacity var(--glass-duration) var(--glass-ease);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .glass-ghost:hover {
+      --glass-fill-alpha: 0.55;
+      --glass-border-alpha: 0.6;
+    }
+    .glass-ghost:hover::before {
+      opacity: 1;
+    }
+  }
+  .glass-ghost:focus-visible {
+    --glass-fill-alpha: 0.55;
+    --glass-border-alpha: 0.6;
+  }
+  .glass-ghost:focus-visible::before {
+    opacity: 1;
+  }
+  @supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    @media (hover: hover) and (pointer: fine) {
+      .glass-ghost:hover {
+        -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+        backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+      }
+    }
+    .glass-ghost:focus-visible {
+      -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+      backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+    }
+  }
+
+  /* CTA principal: sombra reforçada e brilho periódico em repouso
+     (o ÚNICO elemento com animação idle). */
+  .glass-hero {
+    --glass-shadow: 0 3px 8px -2px hsl(0 0% 0% / 0.10), 0 14px 34px -12px hsl(var(--glass-tint) / 0.30);
+  }
+  .glass-hero::after {
+    animation: glass-sheen 6s var(--glass-ease) 1.5s infinite;
+  }
+
+  /* Links de navegação: pílula de vidro que se materializa + sublinhado
+     luminoso. O margin negativo anula o padding: layout ZERO alterado. */
+  .glass-link {
+    display: inline-block;
+    position: relative;
+    isolation: isolate;
+    border-radius: 9999px;
+    padding-inline: 0.625rem;
+    margin-inline: -0.625rem;
+    transition: color var(--glass-duration) var(--glass-ease);
+  }
+  .glass-link::before {
+    content: "";
+    position: absolute;
+    inset: -0.3rem 0;
+    z-index: -1;
+    border-radius: inherit;
+    pointer-events: none;
+    background-color: hsl(var(--glass-fill) / 0.62);
+    border: 1px solid hsl(var(--glass-border) / 0.7);
+    box-shadow:
+      inset 0 1px 0 0 hsl(var(--glass-highlight) / 0.8),
+      0 6px 18px -8px hsl(var(--glass-tint) / 0.35);
+    opacity: 0;
+    transform: scale(0.86);
+    transition:
+      opacity var(--glass-duration) var(--glass-ease),
+      transform var(--glass-duration) var(--glass-ease);
+  }
+  .glass-link::after {
+    content: "";
+    position: absolute;
+    left: 0.625rem;
+    right: 0.625rem;
+    bottom: -0.2rem;
+    height: 2px;
+    pointer-events: none;
+    background: linear-gradient(90deg, transparent, hsl(var(--glass-tint) / 0.9), transparent);
+    transform: scaleX(0);
+    transition: transform var(--glass-duration) var(--glass-ease);
+  }
+  @supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .glass-link::before {
+      -webkit-backdrop-filter: blur(10px) saturate(160%);
+      backdrop-filter: blur(10px) saturate(160%);
+    }
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .glass-link:hover {
+      color: hsl(var(--primary));
+    }
+    .glass-link:hover::before {
+      opacity: 1;
+      transform: scale(1);
+    }
+    .glass-link:hover::after {
+      transform: scaleX(1);
+    }
+  }
+  .glass-link:focus-visible {
+    color: hsl(var(--primary));
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 3px;
+  }
+  .glass-link:focus-visible::before {
+    opacity: 1;
+    transform: scale(1);
+  }
+  .glass-link:focus-visible::after {
+    transform: scaleX(1);
+  }
+
+  /* Links em prosa: sublinhado permanente + "marcador de vidro" em hover. */
+  .glass-link-inline {
+    text-decoration-line: underline;
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 0.18em;
+    text-decoration-color: hsl(var(--primary) / 0.5);
+    border-radius: 0.25rem;
+    padding-inline: 0.15em;
+    margin-inline: -0.15em;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+    transition:
+      background-color var(--glass-duration) var(--glass-ease),
+      text-decoration-color var(--glass-duration) var(--glass-ease),
+      box-shadow var(--glass-duration) var(--glass-ease);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .glass-link-inline:hover {
+      background-color: hsl(var(--glass-tint) / 0.10);
+      text-decoration-color: hsl(var(--primary));
+      box-shadow:
+        inset 0 1px 0 hsl(var(--glass-highlight) / 0.8),
+        0 0 0 1px hsl(var(--glass-border) / 0.7);
+    }
+  }
+  .glass-link-inline:focus-visible {
+    background-color: hsl(var(--glass-tint) / 0.10);
+    text-decoration-color: hsl(var(--primary));
+    box-shadow:
+      inset 0 1px 0 hsl(var(--glass-highlight) / 0.8),
+      0 0 0 1px hsl(var(--glass-border) / 0.7);
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 3px;
+  }
+
+  /* Barra sobreposta (header sticky, toolbar do PdfViewer). SEM
+     overflow:hidden — o menu mobile vive dentro do <header>. */
+  .glass-bar {
+    position: relative;
+    isolation: isolate;
+    background-color: hsl(var(--glass-fill) / 0.72);
+    border-bottom: 1px solid transparent;
+    border-image: linear-gradient(90deg, transparent 0%, hsl(var(--glass-tint) / 0.45) 50%, transparent 100%) 1;
+    box-shadow:
+      inset 0 1px 0 0 hsl(var(--glass-highlight) / 0.7),
+      0 10px 30px -18px hsl(var(--glass-tint) / 0.35);
+  }
+  @supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .glass-bar {
+      -webkit-backdrop-filter: blur(18px) saturate(180%);
+      backdrop-filter: blur(18px) saturate(180%);
+    }
+  }
+
+  /* Painel do menu mobile: igual à barra, mas com a linha luminosa no topo. */
+  .glass-panel {
+    position: relative;
+    isolation: isolate;
+    background-color: hsl(var(--glass-fill) / 0.72);
+    border-top: 1px solid transparent;
+    border-image: linear-gradient(90deg, transparent 0%, hsl(var(--glass-tint) / 0.45) 50%, transparent 100%) 1;
+    box-shadow:
+      inset 0 1px 0 0 hsl(var(--glass-highlight) / 0.7),
+      0 10px 30px -18px hsl(var(--glass-tint) / 0.35);
+  }
+  @supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .glass-panel {
+      -webkit-backdrop-filter: blur(18px) saturate(180%);
+      backdrop-filter: blur(18px) saturate(180%);
+    }
+  }
+
+  /* Divisores luminosos. APENAS para elementos SEM cantos arredondados
+     (border-image ignora border-radius). */
+  .glass-divider-t {
+    border-top: 1px solid transparent;
+    border-image: linear-gradient(90deg, transparent, hsl(var(--glass-tint) / 0.40), transparent) 1;
+  }
+  .glass-divider-b {
+    border-bottom: 1px solid transparent;
+    border-image: linear-gradient(90deg, transparent, hsl(var(--glass-tint) / 0.40), transparent) 1;
+  }
+
+  /* Fundo ambiente decorativo: dois orbes desfocados que dão ao vidro
+     algo para refratar. A secção-mãe precisa de relative isolate overflow-hidden. */
+  .glass-orbs {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  .glass-orbs::before,
+  .glass-orbs::after {
+    content: "";
+    position: absolute;
+    border-radius: 9999px;
+    filter: blur(56px);
+    opacity: 0.55;
+  }
+  .glass-orbs::before {
+    width: 26rem;
+    height: 26rem;
+    top: -10rem;
+    left: -8rem;
+    background: hsl(var(--primary) / 0.35);
+  }
+  .glass-orbs::after {
+    width: 22rem;
+    height: 22rem;
+    right: -7rem;
+    bottom: -9rem;
+    background: hsl(var(--secondary) / 0.40);
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .glass-orbs::before {
+      will-change: transform;
+      animation: glass-drift 22s ease-in-out infinite alternate;
+    }
+    .glass-orbs::after {
+      will-change: transform;
+      animation: glass-drift 26s ease-in-out infinite alternate-reverse;
+    }
+  }
+
+  /* --- Acessibilidade ------------------------------------------------ */
+
+  /* Sem movimento quando o utilizador o pede; o vidro (cor, blur, orlas)
+     mantém-se — o efeito não depende de movimento para existir. */
+  @media (prefers-reduced-motion: reduce) {
+    .glass {
+      transition-property: background-color, border-color, box-shadow, color;
+    }
+    .glass-interactive:hover,
+    .glass-card:hover,
+    .glass-interactive:active {
+      transform: none;
+    }
+    .glass-interactive:hover::after {
+      transition: none;
+      opacity: 0;
+      transform: translateX(-75%) skewX(-14deg);
+    }
+    .glass-link,
+    .glass-link::before,
+    .glass-link::after,
+    .glass-link-inline,
+    .glass-ghost::before {
+      transition: none;
+    }
+    .glass-hero::after,
+    .glass-orbs::before,
+    .glass-orbs::after {
+      animation: none;
+    }
+  }
+
+  /* Menos transparência: fill quase opaco e sem blur (ghosts excluídos —
+     a sua transparência em repouso é funcional, não decorativa). */
+  @media (prefers-reduced-transparency: reduce) {
+    .glass:not(.glass-ghost) {
+      --glass-fill-alpha: 0.96;
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+    }
+    .glass-bar,
+    .glass-panel {
+      background-color: hsl(var(--glass-fill) / 0.96);
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+    }
+  }
+
+  /* Modo de cores forçadas: esconder tudo o que é decorativo. */
+  @media (forced-colors: active) {
+    .glass::before,
+    .glass::after,
+    .glass-link::before,
+    .glass-link::after,
+    .glass-orbs::before,
+    .glass-orbs::after {
+      display: none;
+    }
+  }
+}
+
+/* Keyframes FORA de @layer — dentro de um layer o Tailwind podia purgá-los. */
+@keyframes glass-sheen {
+  0% {
+    transform: translateX(-75%) skewX(-14deg);
+    opacity: 0;
+  }
+  8% {
+    opacity: 1;
+  }
+  28% {
+    transform: translateX(75%) skewX(-14deg);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(75%) skewX(-14deg);
+    opacity: 0;
+  }
+}
+
+@keyframes glass-drift {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(2.5rem, -1.5rem, 0);
   }
 }
