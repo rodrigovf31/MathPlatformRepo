@@ -64,7 +64,7 @@ const YearPage = ({ year: yearNum }: YearPageProps) => {
 
                   return (
                     <div key={topic.id} id={topic.id} className="scroll-mt-24">
-                      <div className="w-full flex items-center gap-3 rounded-lg bg-card border border-border p-4 hover:border-primary/30 transition-colors">
+                      <div className="w-full flex items-center gap-3 rounded-lg glass glass-lite glass-interactive p-4">
                         <h2 className="font-semibold flex-1 min-w-0">
                           <a href={`#${topic.id}`} className="glass-link hover:text-primary transition-colors">{topic.name}</a>
                         </h2>

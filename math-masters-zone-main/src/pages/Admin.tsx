@@ -213,7 +213,7 @@ const Admin = () => {
               <p className="text-muted-foreground text-sm">Nenhum recurso carregado ainda.</p>
             ) : (
               resources.map(r => (
-                <div key={r.id} className="flex items-center gap-4 bg-card border rounded-lg p-3">
+                <div key={r.id} className="flex items-center gap-4 glass glass-lite rounded-lg p-3">
                   <div className="flex-1 min-w-0">
                     <p className="font-medium text-sm truncate">{r.title}</p>
                     <p className="text-xs text-muted-foreground">{r.year}º Ano · {r.type === "ficha" ? "Ficha" : "Guia"} · {r.topic}</p>

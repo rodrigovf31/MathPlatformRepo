@@ -7,7 +7,7 @@ const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b bg-card/95 backdrop-blur supports-[backdrop-filter]:bg-card/80">
+    <header className="sticky top-0 z-50 glass-bar">
       <nav className="container-narrow flex h-16 items-center justify-between" aria-label="Navegação principal">
         <Link to="/" className="glass-link flex items-center gap-2 font-bold text-xl text-primary">
           <BookOpen className="h-6 w-6" />
@@ -41,7 +41,7 @@ const Header = () => {
 
       {/* Mobile menu */}
       {menuOpen && (
-        <div className="md:hidden border-t bg-card px-4 pb-4 pt-2 space-y-2 animate-fade-in-up">
+        <div className="md:hidden glass-panel px-4 pb-4 pt-2 space-y-2 animate-fade-in-up">
           <Link to="/matematica-a/10-ano" className="glass-link block py-2 text-sm font-medium text-muted-foreground" onClick={() => setMenuOpen(false)}>10º Ano</Link>
           <Link to="/matematica-a/11-ano" className="glass-link block py-2 text-sm font-medium text-muted-foreground" onClick={() => setMenuOpen(false)}>11º Ano</Link>
           <Link to="/matematica-a/12-ano" className="glass-link block py-2 text-sm font-medium text-muted-foreground" onClick={() => setMenuOpen(false)}>12º Ano</Link>

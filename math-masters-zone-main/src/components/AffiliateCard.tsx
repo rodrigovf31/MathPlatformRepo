@@ -20,7 +20,7 @@ const AffiliateCard = ({ name, description, imageUrl, affiliateUrl }: AffiliateC
       href={affiliateUrl}
       target="_blank"
       rel="noopener noreferrer sponsored"
-      className="group flex flex-col rounded-xl bg-card border border-border overflow-hidden shadow-card hover:shadow-card-hover transition-all duration-300"
+      className="group flex flex-col rounded-xl glass glass-interactive glass-card"
     >
       <div className="aspect-[4/3] bg-accent-light flex items-center justify-center">
         {imageUrl ? (

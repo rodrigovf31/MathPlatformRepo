@@ -11,7 +11,7 @@ const YearCard = ({ year, description, topicCount }: YearCardProps) => {
   return (
     <Link
       to={`/matematica-a/${year}-ano`}
-      className="group block rounded-xl bg-card border border-border p-6 shadow-card hover:shadow-card-hover hover:border-primary/30 transition-all duration-300"
+      className="group block rounded-xl glass glass-interactive glass-card p-6"
     >
       <div className="flex items-start justify-between mb-4">
         <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 text-primary font-bold text-lg">

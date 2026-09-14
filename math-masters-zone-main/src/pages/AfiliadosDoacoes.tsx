@@ -65,7 +65,7 @@ const AfiliadosDoacoes = () => {
         {/* Secção de Doações PayPal */}
         <section className="section-spacing" aria-labelledby="doacoes-title">
           <div className="container-narrow flex justify-center">
-            <div className="w-full max-w-[600px] rounded-xl bg-card border border-primary/30 p-8 sm:p-10 text-center">
+            <div className="w-full max-w-[600px] rounded-xl glass border-primary/30 p-8 sm:p-10 text-center">
               <div className="flex justify-center mb-4">
                 <div className="flex h-14 w-14 items-center justify-center rounded-full bg-primary/10">
                   <HeartHandshake className="h-7 w-7 text-primary" />
@@ -130,7 +130,7 @@ const AfiliadosDoacoes = () => {
               {affiliateProducts.map((product, i) => (
                 <div
                   key={i}
-                  className="group flex flex-col rounded-xl bg-card border border-border overflow-hidden shadow-card hover:shadow-card-hover hover:scale-[1.02] transition-all duration-300"
+                  className="group flex flex-col rounded-xl glass glass-interactive glass-card"
                 >
                   {/* Imagem placeholder */}
                   <div className="aspect-square bg-muted flex flex-col items-center justify-center gap-2">
@@ -161,7 +161,7 @@ const AfiliadosDoacoes = () => {
             </div>
 
             {/* Disclaimer Amazon Associates — NÃO remover, esconder ou truncar */}
-            <div className="mt-8 rounded-lg border border-border bg-background p-5 text-xs text-muted-foreground leading-relaxed">
+            <div className="mt-8 rounded-lg glass glass-lite p-5 text-xs text-muted-foreground leading-relaxed">
               <p>
                 <strong>Divulgação de Afiliado:</strong> Como Associado da Amazon, este site obtém rendimentos
                 a partir de compras qualificadas. Os links acima são links de afiliado — se comprares através
