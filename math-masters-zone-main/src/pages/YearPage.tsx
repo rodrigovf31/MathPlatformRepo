@@ -75,7 +75,7 @@ const YearPage = ({ year: yearNum }: YearPageProps) => {
                           aria-expanded={isExpanded}
                           aria-controls={panelId}
                           aria-label={isExpanded ? `Fechar recursos de ${topic.name}` : `Abrir recursos de ${topic.name}`}
-                          className="shrink-0 -m-1 p-3 rounded-md hover:bg-muted transition-colors"
+                          className="shrink-0 -m-1 p-3 rounded-md glass glass-ghost glass-interactive"
                         >
                           {isExpanded ? <ChevronDown className="h-5 w-5 text-primary" /> : <ChevronRight className="h-5 w-5 text-muted-foreground" />}
                         </button>
