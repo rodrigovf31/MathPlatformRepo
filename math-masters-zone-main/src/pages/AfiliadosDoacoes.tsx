@@ -32,7 +32,7 @@ const AfiliadosDoacoes = () => {
 
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="section-spacing bg-card border-b">
+        <section className="section-spacing bg-card glass-divider-b">
           <div className="container-narrow max-w-3xl mx-auto">
             <Breadcrumbs items={seo.breadcrumb ?? []} />
           </div>
@@ -65,7 +65,7 @@ const AfiliadosDoacoes = () => {
         {/* Secção de Doações PayPal */}
         <section className="section-spacing" aria-labelledby="doacoes-title">
           <div className="container-narrow flex justify-center">
-            <div className="w-full max-w-[600px] rounded-xl bg-card border border-primary/30 p-8 sm:p-10 text-center">
+            <div className="w-full max-w-[600px] rounded-xl glass border-primary/30 p-8 sm:p-10 text-center">
               <div className="flex justify-center mb-4">
                 <div className="flex h-14 w-14 items-center justify-center rounded-full bg-primary/10">
                   <HeartHandshake className="h-7 w-7 text-primary" />
@@ -93,7 +93,7 @@ const AfiliadosDoacoes = () => {
               </Button>
 
               {/* Disclaimer legal de doações — NÃO remover nem esconder */}
-              <div className="text-xs text-muted-foreground leading-relaxed space-y-1 text-left border-t pt-4 mt-2">
+              <div className="text-xs text-muted-foreground leading-relaxed space-y-1 text-left glass-divider-t pt-4 mt-2">
                 <p>• Os donativos são voluntários e não concedem acesso a conteúdo adicional nem qualquer tipo de vantagem.</p>
                 <p>• Os donativos não são reembolsáveis, salvo em situações excecionais.</p>
                 <p>• Este site não é uma instituição de caridade registada — os donativos não são dedutíveis fiscalmente.</p>
@@ -130,7 +130,7 @@ const AfiliadosDoacoes = () => {
               {affiliateProducts.map((product, i) => (
                 <div
                   key={i}
-                  className="group flex flex-col rounded-xl bg-card border border-border overflow-hidden shadow-card hover:shadow-card-hover hover:scale-[1.02] transition-all duration-300"
+                  className="group flex flex-col rounded-xl glass glass-interactive glass-card"
                 >
                   {/* Imagem placeholder */}
                   <div className="aspect-square bg-muted flex flex-col items-center justify-center gap-2">
@@ -161,7 +161,7 @@ const AfiliadosDoacoes = () => {
             </div>
 
             {/* Disclaimer Amazon Associates — NÃO remover, esconder ou truncar */}
-            <div className="mt-8 rounded-lg border border-border bg-background p-5 text-xs text-muted-foreground leading-relaxed">
+            <div className="mt-8 rounded-lg glass glass-lite p-5 text-xs text-muted-foreground leading-relaxed">
               <p>
                 <strong>Divulgação de Afiliado:</strong> Como Associado da Amazon, este site obtém rendimentos
                 a partir de compras qualificadas. Os links acima são links de afiliado — se comprares através
@@ -175,7 +175,7 @@ const AfiliadosDoacoes = () => {
         </section>
 
         {/* Disclaimer geral da página — antes do footer */}
-        <section className="border-t bg-muted/30 py-8">
+        <section className="glass-divider-t bg-muted/30 py-8">
           <div className="container-narrow max-w-3xl mx-auto text-xs text-muted-foreground leading-relaxed space-y-3 text-center">
             <p>
               Este site apresenta conteúdo publicitário (através do Google AdSense) e links de afiliados
@@ -184,7 +184,7 @@ const AfiliadosDoacoes = () => {
             </p>
             <p>
               Para mais informações sobre como os teus dados são tratados, consulta a nossa{" "}
-              <Link to="/privacidade" className="text-primary underline hover:text-primary/80 transition-colors">
+              <Link to="/privacidade" className="glass-link-inline text-primary hover:text-primary/80">
                 Política de Privacidade
               </Link>.
             </p>

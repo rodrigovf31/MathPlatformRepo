@@ -28,7 +28,8 @@ const Index = () => {
 
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="section-spacing bg-card border-b">
+        <section className="relative isolate overflow-hidden section-spacing bg-card glass-divider-b">
+          <div className="glass-orbs" aria-hidden="true" />
           <div className="container-narrow text-center">
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight mb-4 text-primary">
               Recursos de Matemática A
@@ -65,7 +66,7 @@ const Index = () => {
         <AdBanner className="section-spacing" />
 
         {/* Ferramentas de Estudo Recomendadas (Afiliados) */}
-        <section className="section-spacing bg-card border-t" aria-labelledby="ferramentas-title">
+        <section className="section-spacing bg-card glass-divider-t" aria-labelledby="ferramentas-title">
           <div className="container-narrow">
             <h2 id="ferramentas-title" className="text-2xl font-bold mb-2 text-center">Ferramentas de Estudo Recomendadas</h2>
             <p className="text-muted-foreground text-center mb-8 text-sm">Material que recomendamos para tirares o máximo partido do teu estudo.</p>

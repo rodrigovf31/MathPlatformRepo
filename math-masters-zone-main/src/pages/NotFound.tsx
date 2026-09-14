@@ -31,16 +31,16 @@ const NotFound = () => {
             A página <code className="text-sm">{location.pathname}</code> não existe ou foi movida.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Link to="/" className="text-primary underline hover:text-primary/90 font-medium">
+            <Link to="/" className="glass-link-inline text-primary hover:text-primary/90 font-medium">
               Voltar à página inicial
             </Link>
-            <Link to="/matematica-a/10-ano" className="text-primary underline hover:text-primary/90 font-medium">
+            <Link to="/matematica-a/10-ano" className="glass-link-inline text-primary hover:text-primary/90 font-medium">
               Ver recursos do 10º ano
             </Link>
-            <Link to="/matematica-a/11-ano" className="text-primary underline hover:text-primary/90 font-medium">
+            <Link to="/matematica-a/11-ano" className="glass-link-inline text-primary hover:text-primary/90 font-medium">
               Ver recursos do 11º ano
             </Link>
-            <Link to="/matematica-a/12-ano" className="text-primary underline hover:text-primary/90 font-medium">
+            <Link to="/matematica-a/12-ano" className="glass-link-inline text-primary hover:text-primary/90 font-medium">
               Ver recursos do 12º ano
             </Link>
           </div>

@@ -12,7 +12,7 @@ const PdfCard = ({ title, type, fileUrl, onView }: PdfCardProps) => {
   const isFicha = type === "ficha";
 
   return (
-    <div className="flex items-center gap-4 rounded-lg bg-card border border-border p-4 shadow-card hover:shadow-card-hover transition-all duration-200">
+    <div className="flex items-center gap-4 rounded-lg glass glass-lite glass-interactive p-4">
       <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg ${isFicha ? "bg-primary/10 text-primary" : "bg-accent-light text-accent-gold"}`}>
         {isFicha ? <FileText className="h-5 w-5" /> : <BookOpen className="h-5 w-5" />}
       </div>

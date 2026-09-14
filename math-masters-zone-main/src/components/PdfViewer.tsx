@@ -11,7 +11,7 @@ const PdfViewer = ({ fileUrl, title, onClose }: PdfViewerProps) => {
   return (
     <div className="fixed inset-0 z-50 flex flex-col bg-foreground/80 backdrop-blur-sm" role="dialog" aria-label={`Visualizador: ${title}`}>
       {/* Header */}
-      <div className="flex items-center justify-between gap-4 bg-card border-b px-4 py-3">
+      <div className="flex items-center justify-between gap-4 glass-bar px-4 py-3">
         <h3 className="font-semibold text-sm truncate flex-1">{title}</h3>
         <div className="flex items-center gap-2">
           <Button variant="outline" size="sm" asChild>

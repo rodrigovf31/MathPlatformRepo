@@ -7,20 +7,20 @@ const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b bg-card/95 backdrop-blur supports-[backdrop-filter]:bg-card/80">
+    <header className="sticky top-0 z-50 glass-bar">
       <nav className="container-narrow flex h-16 items-center justify-between" aria-label="Navegação principal">
-        <Link to="/" className="flex items-center gap-2 font-bold text-xl text-primary">
+        <Link to="/" className="glass-link flex items-center gap-2 font-bold text-xl text-primary">
           <BookOpen className="h-6 w-6" />
           <span>MatA</span>
         </Link>
 
         {/* Desktop nav */}
         <div className="hidden md:flex items-center gap-6">
-          <Link to="/matematica-a/10-ano" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">10º Ano</Link>
-          <Link to="/matematica-a/11-ano" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">11º Ano</Link>
-          <Link to="/matematica-a/12-ano" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">12º Ano</Link>
-          <Link to="/sobre" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">Sobre</Link>
-          <Link to="/afiliados-e-doacoes" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors flex items-center gap-1">
+          <Link to="/matematica-a/10-ano" className="glass-link text-sm font-medium text-muted-foreground hover:text-primary transition-colors">10º Ano</Link>
+          <Link to="/matematica-a/11-ano" className="glass-link text-sm font-medium text-muted-foreground hover:text-primary transition-colors">11º Ano</Link>
+          <Link to="/matematica-a/12-ano" className="glass-link text-sm font-medium text-muted-foreground hover:text-primary transition-colors">12º Ano</Link>
+          <Link to="/sobre" className="glass-link text-sm font-medium text-muted-foreground hover:text-primary transition-colors">Sobre</Link>
+          <Link to="/afiliados-e-doacoes" className="glass-link text-sm font-medium text-muted-foreground hover:text-primary transition-colors flex items-center gap-1">
             <Heart className="h-4 w-4 text-accent-warm" />
             Apoiar o Projeto
           </Link>
@@ -41,12 +41,12 @@ const Header = () => {
 
       {/* Mobile menu */}
       {menuOpen && (
-        <div className="md:hidden border-t bg-card px-4 pb-4 pt-2 space-y-2 animate-fade-in-up">
-          <Link to="/matematica-a/10-ano" className="block py-2 text-sm font-medium text-muted-foreground" onClick={() => setMenuOpen(false)}>10º Ano</Link>
-          <Link to="/matematica-a/11-ano" className="block py-2 text-sm font-medium text-muted-foreground" onClick={() => setMenuOpen(false)}>11º Ano</Link>
-          <Link to="/matematica-a/12-ano" className="block py-2 text-sm font-medium text-muted-foreground" onClick={() => setMenuOpen(false)}>12º Ano</Link>
-          <Link to="/sobre" className="block py-2 text-sm font-medium text-muted-foreground" onClick={() => setMenuOpen(false)}>Sobre</Link>
-          <Link to="/afiliados-e-doacoes" className="flex items-center gap-1 py-2 text-sm font-medium text-muted-foreground" onClick={() => setMenuOpen(false)}>
+        <div className="md:hidden glass-panel px-4 pb-4 pt-2 space-y-2 animate-fade-in-up">
+          <Link to="/matematica-a/10-ano" className="glass-link block py-2 text-sm font-medium text-muted-foreground" onClick={() => setMenuOpen(false)}>10º Ano</Link>
+          <Link to="/matematica-a/11-ano" className="glass-link block py-2 text-sm font-medium text-muted-foreground" onClick={() => setMenuOpen(false)}>11º Ano</Link>
+          <Link to="/matematica-a/12-ano" className="glass-link block py-2 text-sm font-medium text-muted-foreground" onClick={() => setMenuOpen(false)}>12º Ano</Link>
+          <Link to="/sobre" className="glass-link block py-2 text-sm font-medium text-muted-foreground" onClick={() => setMenuOpen(false)}>Sobre</Link>
+          <Link to="/afiliados-e-doacoes" className="glass-link flex items-center gap-1 py-2 text-sm font-medium text-muted-foreground" onClick={() => setMenuOpen(false)}>
             <Heart className="h-4 w-4 text-accent-warm" />
             Apoiar o Projeto
           </Link>
