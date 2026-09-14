@@ -37,7 +37,7 @@ const About = () => {
             <h2 className="text-xl font-bold text-foreground pt-4">Precisas de ajuda extra?</h2>
             <p>
               Se as fichas não são suficientes, considera as{" "}
-              <a href="https://explicacoesonlinemat.pt" target="_blank" rel="noopener noreferrer" className="text-accent-warm font-medium hover:underline">
+              <a href="https://explicacoesonlinemat.pt" target="_blank" rel="noopener noreferrer" className="glass-link-inline text-accent-warm font-medium">
                 explicações online de Matemática A
               </a>
               {" "}— sessões individuais e personalizadas para te ajudar a superar as tuas dificuldades.

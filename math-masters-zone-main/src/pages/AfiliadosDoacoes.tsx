@@ -184,7 +184,7 @@ const AfiliadosDoacoes = () => {
             </p>
             <p>
               Para mais informações sobre como os teus dados são tratados, consulta a nossa{" "}
-              <Link to="/privacidade" className="text-primary underline hover:text-primary/80 transition-colors">
+              <Link to="/privacidade" className="glass-link-inline text-primary hover:text-primary/80">
                 Política de Privacidade
               </Link>.
             </p>
